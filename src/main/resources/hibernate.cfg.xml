@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">60</property>
+		<property name="hibernate.c3p0.min_size">20</property>
+		<property name="hibernate.c3p0.max_size">100</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.timeout">10</property>
+		<property name="hibernate.c3p0.acquireRetryAttempts">1</property>
+		<property name="hibernate.c3p0.acquireRetryDelay">10</property>
+		<property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="show_sql">false</property>
+		
+		<property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+		<property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
+		<property name="connection.url">jdbc:mariadb://mariadb105.r1.websupport.sk/hackhealthcare</property>
+		<property name="hibernate.connection.password">Pj6}gFs%kP</property>
+		<property name="hibernate.connection.username">hackhealthcare</property>
+
+		<mapping class="hack.healthcare.server.model.Test" />
+		<mapping class="hack.healthcare.server.model.Doctor" />
+		<mapping class="hack.healthcare.server.model.ZilinaData" />
+		<mapping class="hack.healthcare.server.model.ZilinaAbsencie" />
+		<mapping class="hack.healthcare.server.model.Lekaren" />
+		<mapping class="hack.healthcare.server.model.Aps" />
+		
+	</session-factory>
+</hibernate-configuration>
