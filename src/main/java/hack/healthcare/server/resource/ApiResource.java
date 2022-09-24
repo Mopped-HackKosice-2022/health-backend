@@ -32,4 +32,18 @@ public class ApiResource {
 			return Response.status(HttpServletResponse.SC_INTERNAL_SERVER_ERROR).entity(e).build();
 		}
 	}
+	
+	/*
+	 * 
+	 * // Endpoint APS mapa - GET /.../{okres-ID}   všetky APS ktoré majú daný okres 
+[
+  {
+    "name": "Name",
+    "address": "address",
+    "lng": 0,
+    "lat": 0,
+  }
+]*/
+	
+	
 }
