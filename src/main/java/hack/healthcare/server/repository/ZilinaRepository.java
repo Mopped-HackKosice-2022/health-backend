@@ -7,7 +7,9 @@ import org.hibernate.Transaction;
 
 import hack.healthcare.server.model.Aps;
 import hack.healthcare.server.model.Lekaren;
+import hack.healthcare.server.model.Liek;
 import hack.healthcare.server.model.Test;
+import hack.healthcare.server.model.ZilinaAbsencie;
 import hack.healthcare.server.model.ZilinaData;
 import hack.healthcare.server.utils.HibernateUtil;
 
@@ -165,6 +167,135 @@ public class ZilinaRepository {
 			List<Aps> datas = session
 					.createQuery("from Aps where lower(title) like :search or lower(adresa) = :search", Aps.class)
 					.setParameter("search", '%' + search + '%').list();
+
+			session.flush();
+			transaction.commit();
+
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public List<Lekaren> getLekarenByOkres(Integer okresId) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			List<Lekaren> datas = session.createQuery("from Lekaren where okresId = :okresId", Lekaren.class)
+					.setParameter("okresId", okresId).list();
+
+			session.flush();
+			transaction.commit();
+
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public ZilinaData getDoctorDetail(Integer id) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			ZilinaData datas = session.createQuery("from ZilinaData where id = :id", ZilinaData.class)
+					.setParameter("id", id).getSingleResult();
+
+			session.flush();
+			transaction.commit();
+
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public ZilinaData getZilinaDataById(Integer id) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			ZilinaData datas = session.createQuery("from ZilinaData where id = :id", ZilinaData.class)
+					.setParameter("id", id).getSingleResult();
+
+			session.flush();
+			transaction.commit();
+
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public List<ZilinaAbsencie> getAbsencie(String doctorId) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			List<ZilinaAbsencie> datas = session
+					.createQuery("from ZilinaAbsencie where doctorId = :doctorId", ZilinaAbsencie.class)
+					.setParameter("doctorId", doctorId).list();
+
+			session.flush();
+			transaction.commit();
+
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public ZilinaData getDoctorByDoctorId(String doctorId) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			ZilinaData datas = session.createQuery("from ZilinaData where doctorId = :doctorId", ZilinaData.class)
+					.setParameter("doctorId", doctorId).getSingleResult();
+
+			session.flush();
+			transaction.commit();
+
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public List<Liek> saveLieky(List<Liek> datas) {
+
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			datas.stream().forEach(session::save);
+
+			session.flush();
+			transaction.commit();
+			return datas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+
+	}
+
+	public List<Liek> getLieky(String key) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+
+			List<Liek> datas = session
+					.createQuery("from Liek where lower(kod) like :key or lower(nazov) = :key", Liek.class)
+					.setParameter("key", '%' + key + '%').list();
 
 			session.flush();
 			transaction.commit();

@@ -13,7 +13,9 @@ import java.util.List;
 import com.opencsv.CSVReader;
 
 import hack.healthcare.server.model.Doctor;
+import hack.healthcare.server.model.Liek;
 import hack.healthcare.server.repository.DoctorRepository;
+import hack.healthcare.server.repository.ZilinaRepository;
 
 public class CsvService {
 
@@ -22,15 +24,15 @@ public class CsvService {
 		if (doctors == null) {
 			throw new NullPointerException();
 		}
-		
+
 		DoctorRepository repository = new DoctorRepository();
-		
+
 		doctors = repository.saveDoctors(doctors);
-		
-		if(doctors == null) {
+
+		if (doctors == null) {
 			throw new NullPointerException();
 		}
-		
+
 		return doctors;
 	}
 
@@ -64,6 +66,48 @@ public class CsvService {
 				doctors.add(doctor);
 			}
 			return doctors;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void createLieky() {
+		List<Liek> lieky = getLiekyFromCsv();
+
+		ZilinaRepository repository = new ZilinaRepository();
+
+		repository.saveLieky(lieky);
+
+	}
+
+	private List<Liek> getLiekyFromCsv() {
+		try {
+			FileReader filereader = new FileReader("C:\\Users\\marti\\Desktop\\cast_A_zoznam_liekov_k_01_09_2022.csv", StandardCharsets.UTF_8);
+			CSVReader csvReader = new CSVReader(filereader);
+			String[] nextRecord;
+			List<Liek> datas = new ArrayList<Liek>();
+			int y = 0;
+			// we are going to read data line by line
+			while ((nextRecord = csvReader.readNext()) != null) {
+				if (y == 0) {
+					y = 1;
+					continue;
+				}
+				y++;
+				if(y == 50) {
+					break;
+				}
+				Liek liek = new Liek();
+
+				liek.setKod(nextRecord[0]);
+				liek.setType(nextRecord[1]);
+				liek.setNazov(nextRecord[2]);
+				liek.setDoplnok(nextRecord[3]);
+
+				datas.add(liek);
+			}
+			return datas;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

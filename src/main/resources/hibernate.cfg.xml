@@ -28,6 +28,7 @@
 		<mapping class="hack.healthcare.server.model.ZilinaAbsencie" />
 		<mapping class="hack.healthcare.server.model.Lekaren" />
 		<mapping class="hack.healthcare.server.model.Aps" />
+		<mapping class="hack.healthcare.server.model.Liek" />
 		
 	</session-factory>
 </hibernate-configuration>

@@ -1,34 +1,19 @@
-package hack.healthcare.server.model;
+package hack.healthcare.server.pojos;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "zilina_absencie", schema = "public")
-public class ZilinaAbsencie {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", columnDefinition = "serial")
+public class ZilinaAbsencieResponse {
 	private Integer id;
-	@Column(name = "title", length = 1000)
 	private String title;
-	@Column(name = "doctorUrl", length = 1000)
 	private String doctorUrl;
-	@Column(name = "specialization", length = 1000)
 	private String specialization;
-	@Column(name = "kraj", length = 1000)
 	private String kraj;
-	@Column(name = "nepritomnost", length = 1000)
 	private String nepritomnost;
-	@Column(name = "doctorId", length = 1000)
 	private String doctorId;
-	@Column(name = "zastupenie", length = 1000)
 	private String zastupenie;
+	private Integer zilinaDataId;
 
 	public Integer getId() {
 		return id;
@@ -86,22 +71,6 @@ public class ZilinaAbsencie {
 		this.doctorId = doctorId;
 	}
 
-	public ZilinaAbsencie(Integer id, String title, String doctorUrl, String specialization, String kraj,
-			String nepritomnost, String doctorId) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.doctorUrl = doctorUrl;
-		this.specialization = specialization;
-		this.kraj = kraj;
-		this.nepritomnost = nepritomnost;
-		this.doctorId = doctorId;
-	}
-
-	public ZilinaAbsencie() {
-		super();
-	}
-
 	public String getZastupenie() {
 		return zastupenie;
 	}
@@ -110,7 +79,15 @@ public class ZilinaAbsencie {
 		this.zastupenie = zastupenie;
 	}
 
-	public ZilinaAbsencie(Integer id, String title, String doctorUrl, String specialization, String kraj,
+	public Integer getZilinaDataId() {
+		return zilinaDataId;
+	}
+
+	public void setZilinaDataId(Integer zilinaDataId) {
+		this.zilinaDataId = zilinaDataId;
+	}
+
+	public ZilinaAbsencieResponse(Integer id, String title, String doctorUrl, String specialization, String kraj,
 			String nepritomnost, String doctorId, String zastupenie) {
 		super();
 		this.id = id;
@@ -121,6 +98,10 @@ public class ZilinaAbsencie {
 		this.nepritomnost = nepritomnost;
 		this.doctorId = doctorId;
 		this.zastupenie = zastupenie;
+	}
+
+	public ZilinaAbsencieResponse() {
+		super();
 	}
 
 }

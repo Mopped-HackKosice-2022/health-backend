@@ -30,7 +30,7 @@ public class ZilinaAbsencieService {
 
 	private List<ZilinaAbsencie> getZilinaAbsencieDataFromCsvFile() {
 		try {
-			FileReader filereader = new FileReader("C:\\Users\\marti\\Desktop\\žilina_absence.csv");
+			FileReader filereader = new FileReader("C:\\Users\\marti\\Desktop\\žilina_absence.csv", StandardCharsets.UTF_8);
 			CSVReader csvReader = new CSVReader(filereader);
 			String[] nextRecord;
 			List<ZilinaAbsencie> datas = new ArrayList<ZilinaAbsencie>();
@@ -44,12 +44,13 @@ public class ZilinaAbsencieService {
 
 				ZilinaAbsencie zilinaAbsencie = new ZilinaAbsencie();
 				
-				zilinaAbsencie.setTitle(new String(nextRecord[0].getBytes(), StandardCharsets.UTF_8));
-				zilinaAbsencie.setDoctorUrl(new String(nextRecord[1].getBytes(), StandardCharsets.UTF_8));
-				zilinaAbsencie.setSpecialization(new String(nextRecord[2].getBytes(), StandardCharsets.UTF_8));
-				zilinaAbsencie.setKraj(new String(nextRecord[3].getBytes(), StandardCharsets.UTF_8));
-				zilinaAbsencie.setNepritomnost(new String(nextRecord[4].getBytes(), StandardCharsets.UTF_8));
-				zilinaAbsencie.setDoctorId(new String(nextRecord[5].getBytes(), StandardCharsets.UTF_8));
+				zilinaAbsencie.setTitle(nextRecord[0]);
+				zilinaAbsencie.setDoctorUrl(nextRecord[1]);
+				zilinaAbsencie.setSpecialization(nextRecord[2]);
+				zilinaAbsencie.setKraj(nextRecord[3]);
+				zilinaAbsencie.setNepritomnost(nextRecord[4]);
+				zilinaAbsencie.setDoctorId(nextRecord[5]);
+				zilinaAbsencie.setZastupenie(nextRecord[6]);
 				datas.add(zilinaAbsencie);
 			}
 			return datas;
